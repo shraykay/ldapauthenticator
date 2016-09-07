@@ -48,7 +48,7 @@ class LDAPAuthenticator(Authenticator):
     )
 
     valid_username_regex = Unicode(
-        r'^[a-z][.a-z0-9_-]*$',
+        r'^[a-z][.a-z0-9_\-@]*[a-z]{2,}$',
         config=True,
         help="""Regex to use to validate usernames before sending to LDAP
 

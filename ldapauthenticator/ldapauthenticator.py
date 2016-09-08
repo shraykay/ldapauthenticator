@@ -143,7 +143,7 @@ class LDAPAuthenticator(Authenticator):
                     userattr=self.user_attribute,
                     username=username
                 ),
-                attributes=[self.user_attribute]
+                attributes=['cn']
             )
 
             if len(conn.response) == 0:

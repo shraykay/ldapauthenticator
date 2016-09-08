@@ -150,7 +150,10 @@ class LDAPAuthenticator(Authenticator):
                 self.log.warn('User with {userattr}={username} not found in directory'.format(
                     userattr=self.user_attribute, username=username))
                 return None
-            users_dn_attr = conn.response[0]['dn']
+            #users_dn_attr = conn.response[0]['dn']
+            users_dn_attr = conn.response[0]['attributes']['cn'][0]
+            print("Got dn_attr:")
+            print(users_dn_attr)
 
             logindn = self.bind_user_template.format(username=users_dn_attr)
 
@@ -158,6 +161,11 @@ class LDAPAuthenticator(Authenticator):
 
             if user_conn.bind():
                 return username
+            else:
+                self.log.warn('Unable to bind {username}'.format(
+                    username=userdn,
+                ))
+                return None
 
         else:
             self.log.warn('Invalid password for user {username}'.format(

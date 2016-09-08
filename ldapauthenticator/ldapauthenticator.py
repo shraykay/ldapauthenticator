@@ -160,7 +160,7 @@ class LDAPAuthenticator(Authenticator):
             user_conn = ldap3.Connection(server, user=logindn, password=password)
 
             if user_conn.bind():
-                return username
+                return users_dn_attr
             else:
                 self.log.warn('Unable to bind {username}'.format(
                     username=userdn,

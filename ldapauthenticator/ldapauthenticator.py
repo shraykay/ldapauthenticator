@@ -124,7 +124,7 @@ class LDAPAuthenticator(Authenticator):
             self.log.warn('Empty password')
             return None
 
-        admindn = self.bind_dn_template.format(username=admin_user)
+        admindn = self.bind_dn_template.format(username=self.admin_user)
 
         server = ldap3.Server(
             self.server_address,
@@ -132,7 +132,7 @@ class LDAPAuthenticator(Authenticator):
             use_ssl=self.use_ssl
         )
 
-        conn = ldap3.Connection(server, user=admindn, password=admin_password)
+        conn = ldap3.Connection(server, user=admindn, password=self.admin_password)
 
         if conn.bind():
 

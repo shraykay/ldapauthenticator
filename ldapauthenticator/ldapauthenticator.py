@@ -131,7 +131,9 @@ class LDAPAuthenticator(Authenticator):
             port=self.server_port,
             use_ssl=self.use_ssl
         )
-
+        
+        print(server, admindn)
+        
         conn = ldap3.Connection(server, user=admindn, password=self.admin_password)
 
         if conn.bind():
